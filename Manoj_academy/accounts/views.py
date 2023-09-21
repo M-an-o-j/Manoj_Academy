@@ -55,7 +55,6 @@ class LoginView(APIView):
 
             try:
                 tok = Token.objects.get(user = user)
-                print(tok)
             except Exception as e:
                 print(e)
 
@@ -89,7 +88,6 @@ class LoginView(APIView):
                         'message':'Simultaneous login feature is not available'
                     })
         except Exception as e:
-            print(e, "hii")
             return Response({
                 'data': {},
                 'message': 'something went wrong in try'
