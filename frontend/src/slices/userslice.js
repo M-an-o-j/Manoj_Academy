@@ -5,11 +5,13 @@ const userslice = createSlice({
     initialState: {
         loading: false,
         isAuthenticated : false,
-        user: [],
+        user: null,
+        userdata:null
     },
     reducers: {
         registeruserRequest(state, action) {
             return {
+                ...state,
                 loading: true
             }
         },
@@ -17,13 +19,15 @@ const userslice = createSlice({
             return {
                 loading: false,
                 isAuthenticated:true,
-                user:action.payload
+                user:action.payload,
+                userdata:null
             }
         },
         registeruserError(state, action) {
             return {
                 loading: false,
                 isAuthenticated:false,
+                userdata:null,
                 error:action.payload
             }
         },
@@ -31,41 +35,47 @@ const userslice = createSlice({
             return {
                 ...state,
                 loading: true,
+                userdata:null
             }
         },
         loginuserSuccess(state, action) {
             return {
                 loading: false,
                 isAuthenticated:true,
-                user:action.payload
+                user:action.payload,
+                userdata:null
             }
         },
         loginuserError(state, action) {
             return {
                 loading: false,
                 isAuthenticated:false,
-                error:action.payload
+                error:action.payload,
+                userdata:null
             }
         },
         userdataRequest(state, action) {
             return {
                 isAuthenticated:false,
                 loading: true,
-                user:null
+                user:null,
+                userdata:null
             }
         },
         userdataSuccess(state, action) {
             return {
                 loading: false,
                 isAuthenticated:true,
-                user:action.payload
+                user:action.payload,
+                userdata:action.payload
             }
         },
         userdataError(state, action) {
             return {
                 loading: false,
                 isAuthenticated:false,
-                error:action.payload
+                error:action.payload,
+                userdata:null
             }
         },
         
@@ -73,6 +83,7 @@ const userslice = createSlice({
             return {
                 ...state,
                 loading: true,
+                userdata:null,
             }
         },
         logoutuserSuccess(state, action) {
@@ -80,14 +91,16 @@ const userslice = createSlice({
                 loading: false,
                 isAuthenticated:false,
                 user:null,
-                message:action.payload
+                message:action.payload,
+                userdata:null
             }
         },
         logoutuserError(state, action) {
             return {
                 loading: false,
                 isAuthenticated:false,
-                error:action.payload
+                error:action.payload,
+                userdata:null
             }
         },
 

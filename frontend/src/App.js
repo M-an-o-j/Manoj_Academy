@@ -9,6 +9,7 @@ import ContentDetail from './layouts/ContentDetail'
 import { useDispatch, useSelector } from 'react-redux'
 import { loaduser } from './actions/userAction'
 import Lesson from './layouts/Lesson'
+import Profile from './layouts/Profile'
 
 
 const App = () => {
@@ -28,7 +29,8 @@ const App = () => {
             <Route path='register/' element={<RegisterPage />} />
             <Route path='login/' element={<LoginPage />} />
             <Route path='content/:uid' element={<ContentDetail />} />
-            <Route path='content/:uid/lessons' element={<Lesson />} />
+            <Route path='content/:uid/lessons/:uid' element={<Lesson />} />
+            <Route path='myprofile/' element={<Profile />} />
           </Routes>
         </Router>
       </div>

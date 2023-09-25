@@ -3,24 +3,28 @@ import React, { useEffect, useState } from 'react'
 import Homedata from '../components/Homedata'
 import { useDispatch, useSelector } from 'react-redux'
 import { getHomecontent } from '../actions/contentAction'
+import { loaduser } from '../actions/userAction'
 
 
 const Home = () => {
   const { loading, contents, error } = useSelector((state) => state.Homecontentstate)
-  const { user, isAuthenticated } = useSelector((state) => state.Userdatastate)
+  const { user, isAuthenticated, userdata } = useSelector((state) => state.Userdatastate)
   const dispatch = useDispatch()
   const first_name = localStorage.getItem('MA_User')
 
   useEffect(() => {
+    dispatch(loaduser)
     dispatch(getHomecontent)
-  }, [dispatch , first_name])
+  }, [dispatch])
+
+  console.log(userdata)
 
   return (
     <>
       <div className='mt-3 container'>
-        {first_name != null &&
+        {userdata != null &&
           <div className='text-center'>
-            <h2 >Welcome {first_name} ..,</h2>
+            <h2 >Welcome {userdata.user.first_name} ..,</h2>
           </div>
         }
         <Homedata datas={contents} />

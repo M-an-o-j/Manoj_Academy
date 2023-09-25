@@ -63,10 +63,12 @@ class VideoView(APIView):
                serializer = VideoContentserializers(Video)
 
                return Response({
+                    'status':True,
                     'data':serializer.data,
                     'message':'Succesfully fetched a video'
                 })
           else:
                return Response({
+                    'status':False,
                     'message':'You don\'t have access'
                })

@@ -30,6 +30,11 @@ const Header = () => {
                                     <>
                                         <div>
                                             <li className="nav-item">
+                                                <Link className="nav-link active" aria-current="page" to={'myprofile/'}>My Profile</Link>
+                                            </li>
+                                        </div>
+                                        <div>
+                                            <li className="nav-item">
                                                 <Link className="nav-link active" aria-current="page" onClick={Logout}>Logout</Link>
                                             </li>
                                         </div>
