@@ -3,11 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from rest_framework_simplejwt.tokens import RefreshToken
 
-class UserSerializer(serializers.Serializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['__all__']
-    
+        exclude = ['password']
 
 class Registerserializer(serializers.Serializer):
     first_name = serializers.CharField()

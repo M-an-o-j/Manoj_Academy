@@ -5,13 +5,15 @@ from rest_framework.authentication import TokenAuthentication
 from .serializer import PublicContentserializers,UserContentserializers, VideoContentserializers
 from .models import Content
 from django.core.paginator import Paginator
-from rest_framework import status
+from rest_framework import status , viewsets
 from django.db.models import Q
+
+
 
 class PublicView(APIView):
     def get(self, request):
         try:
-            content = Content.objects.all()
+            content = Content.objects.all().order_by("created_at")
 
             if request.GET.get('search'):
                     search = request.GET.get('search')
@@ -19,9 +21,9 @@ class PublicView(APIView):
                         description_text__icontains=search))
                 
             page_number = request.GET.get('page', 1)
-            paginator = Paginator(content, 2)
+            paginator = Paginator(content, 4)
 
-            serializer = PublicContentserializers(paginator.page(page_number), many=True)
+            serializer = PublicContentserializers(paginator.page(page_number),context={'request':request}, many=True)
 
             return Response({
                    'data': serializer.data,

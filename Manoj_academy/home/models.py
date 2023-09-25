@@ -6,6 +6,8 @@ from django.utils import timezone
 import os
 from django.conf import settings
 
+
+
 class VideoStorage(FileSystemStorage):
     def get_available_name(self, name, max_length=None):
         # Generate a unique name for the video file

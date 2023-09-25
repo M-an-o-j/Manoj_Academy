@@ -74,7 +74,6 @@ class LoginView(APIView):
                         }, status=status.HTTP_401_UNAUTHORIZED)
 
                     token, __ = Token.objects.get_or_create(user=user)
-                    Response
                     response = Response({
                         'status': True,
                         'message': 'User Logged in',
@@ -101,6 +100,19 @@ class LogoutView(APIView):
 
     def post(self, request):
         request.auth.delete()
-        response = Response({'message': 'Logout successful'}, status=status.HTTP_200_OK)
+        response = Response({'status':True ,'message': 'Logout successful'}, status=status.HTTP_200_OK)
         response.delete_cookie('MA_token')
         return response
+
+class MyProfile(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        data = request.user
+        serializer = UserSerializer(data)
+        print(serializer.data)
+        return Response({
+            'status':True,
+            'user':serializer.data
+        })
