@@ -32,6 +32,7 @@ class PublicView(APIView):
 
         except Exception as e:
             return Response({
+               'status':False,
                 'data': {},
                 'message': 'Something went wrong'
             })
@@ -47,8 +48,9 @@ class DetailcontentView(APIView):
           serializer = UserContentserializers(content)
 
           return Response({
+               'status':True,
                'data':serializer.data,
-               'message':'succesfuuly fetcched a content'
+               'message':'succesfuuly fetched a content'
           })
      
 class VideoView(APIView):

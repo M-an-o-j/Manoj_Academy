@@ -76,7 +76,7 @@ class LoginView(APIView):
                     token, __ = Token.objects.get_or_create(user=user)
                     response = Response({
                         'status': True,
-                        'message': 'User Logged in',
+                        'message': 'Logged in successfullys',
                         'Token': str(token),
                         'data': response_data
                     }, status.HTTP_201_CREATED)
@@ -84,6 +84,7 @@ class LoginView(APIView):
                     return response
             else:
                 return Response({
+                        'status':False,
                         'message':'Simultaneous login feature is not available'
                     })
         except Exception as e:
@@ -109,10 +110,10 @@ class MyProfile(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        data = request.user
-        serializer = UserSerializer(data)
-        print(serializer.data)
-        return Response({
-            'status':True,
-            'user':serializer.data
-        })
+            data = request.user
+            serializer = UserSerializer(data)
+            print(serializer.data)
+            return Response({
+                'status':True,
+                'user':serializer.data
+            })
